@@ -1,0 +1,19 @@
+{
+  "name": "nodeprodutos",
+  "version": "1.0.0",
+  "description": "api para o exemplo lista-crud-app do artigo medium",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewMak/apiexpressjs.git"
+  },
+  "author": "Andrew Chan Mak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndrewMak/apiexpressjs/issues"
+  },
+  "homepage": "https://github.com/AndrewMak/apiexpressjs#readme"
+}
