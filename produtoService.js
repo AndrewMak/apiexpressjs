@@ -11,7 +11,18 @@ const Produto = require('./produto')
 // @access Public
 router.get('/', (req, res) => {
     Produto.find()
-        .then(produtos => res.json(produtos));
+    .then(produtos => res.json(produtos));
+});
+
+// @route GET api/produtos
+// @desc Get All produtos
+// @access Public
+router.get('/:id', (req, res) => {
+        Produto.findById(req.params.id)
+        .then(produtos => res.json(produtos))
+        .catch(err => res.status(404).json({
+            success: false
+        }));
 });
 
 // @route   POST api/produtos
@@ -30,7 +41,7 @@ router.post('/', (req, res) => {
 // @route   DELETE api/produtos/:id
 // @desc    Delete A Produto
 // @access  Public
-router.delete('/:id', (req, res) => {
+router.post('/delete/:id', (req, res) => {
     Produto.findById(req.params.id)
         .then(Produto => Produto.remove().then(() => res.json({
             success: true
@@ -38,5 +49,11 @@ router.delete('/:id', (req, res) => {
         .catch(err => res.status(404).json({
             success: false
         }));
+});
+
+router.post('/:id',(req,res)=>{
+    Produto.updateOne({ _id: req.params.id}, req.body, false).then(Produto => res.json(Produto)).catch(err => res.status(404).json({
+        success: false
+    }));
 });
 module.exports = router;
