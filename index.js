@@ -37,6 +37,8 @@ mongoose
 app.use('/api/produto', produtoService);
 app.use('/api/usuario', usuarioService);
 
+
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(('api server listening on port ' + port)))

@@ -5,7 +5,19 @@ const jwt = require('jsonwebtoken');
 // Usuario Model
 
 const Usuario = require('./usuario')
-
+const checkToken = (req, res, next) => {
+  let token = req.headers['x-access-token'];
+  if (!token) return res.status(401).send({
+    auth: false,
+    message: 'No token provided.'
+  });
+  jwt.verify(token, secretKey, function (err, decoded) {
+    if (err) return res.status(500).send({
+      auth: false,
+      message: 'Failed to authenticate token.'
+  });
+  next();
+}
 const secretKey = require('./keys').secretKey;
 
 router.post('/register', function (req, res) {
@@ -51,13 +63,12 @@ router.post('/register-admin', function (req, res) {
   });
 });
 
-router.get('/me', function (req, res) {
+router.get('/me', checkToken, function (req, res) {
   let token = req.headers['x-access-token'];
   if (!token) return res.status(401).send({
     auth: false,
     message: 'No token provided.'
   });
-
   jwt.verify(token, secretKey, function (err, decoded) {
     if (err) return res.status(500).send({
       auth: false,
@@ -89,4 +100,7 @@ router.post('/login', (req, res) => {
     });
     });
 })
+
+
+
 module.exports = router;
