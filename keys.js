@@ -1,3 +1,4 @@
 module.exports = {
-    mongoURI: 'url mongo aqui'
+    mongoURI: '',
+    secretKey: 'supersecret'
   };
