@@ -51,8 +51,10 @@ router.delete('/delete/:id', (req, res) => {
         }));
 });
 
-router.put('/:id',(req,res)=>{
-    Produto.updateOne({ _id: req.params.id}, req.body, false).then(Produto => res.json(Produto)).catch(err => res.status(404).json({
+router.put('/:id',(req,res)=> {
+    Produto.updateOne({ _id: req.params.id}, {$set: req.body})
+    .then(Produto => res.json(Produto))
+    .catch(err => res.status(404).json({
         success: false
     }));
 });
